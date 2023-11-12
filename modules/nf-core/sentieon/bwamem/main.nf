@@ -5,7 +5,10 @@ process SENTIEON_BWAMEM {
 
     secret 'SENTIEON_LICENSE_BASE64'
 
-    container 'nf-core/sentieon:202112.06'
+    conda "bioconda::sentieon=202308"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/sentieon%3A202308--h43eeafb_0' :
+        'biocontainers/sentieon:202308--h43eeafb_0' }"
 
     input:
     tuple val(meta), path(reads)
