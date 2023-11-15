@@ -25,9 +25,9 @@ process SENTIEON_BWAMEM {
 
     script:
     // Exit if running this module with -profile conda / -profile mamba
-    if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
-        error "Sentieon modules do not support Conda. Please use Docker / Singularity / Podman instead."
-    }
+    // if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+    //    error "Sentieon modules do not support Conda. Please use Docker / Singularity / Podman instead."
+    // }
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def sentieon_auth_mech_base64 = task.ext.sentieon_auth_mech_base64 ?: ''
