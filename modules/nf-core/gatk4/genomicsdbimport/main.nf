@@ -52,6 +52,7 @@ process GATK4_GENOMICSDBIMPORT {
     } else {
         avail_mem = (task.memory.mega*0.8).intValue()
     }
+
     """
     gatk --java-options "-Xmx${avail_mem}M -XX:-UsePerfData" \\
         GenomicsDBImport \\
@@ -60,6 +61,8 @@ process GATK4_GENOMICSDBIMPORT {
         $interval_command \\
         --tmp-dir . \\
         $args
+
+    chmod 764 ${prefix}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
